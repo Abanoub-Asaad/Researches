@@ -1,0 +1,19 @@
+Ref.1 
+http://www.tutorsglobe.com/homework-help/operation-research/phases-of-operation-research-7165.aspx
+Ref.2
+Wikipedia
+
+code matlab
+
+prob = optimproblem('ObjectiveSense','min');
+x = optimvar('x',4,3,2,1,'LowerBound',0);
+prob.Objective = 45*x(1) + 40*x(2)+85*x(3)+65*x(4);
+cons1 = 3*x(1) + 4*x(2)+8*x(3)+6*x(4) >= 800;
+cons2 = 2*x(1) + 2*x(2)+7*x(3)+5*x(4) >= 200;
+cons3 = 6*x(1) + 4*x(2)+7*x(3)+4*x(4) >= 700;
+prob.Constraints.cons1 = cons1;
+prob.Constraints.cons2 = cons2;
+prob.Constraints.cons2 = cons3;
+show(prob)
+sol = solve(prob);
+sol.x
