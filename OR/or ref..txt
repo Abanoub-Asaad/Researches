@@ -1,6 +1,10 @@
 Ref.1 
-http://www.tutorsglobe.com/homework-help/operation-research/phases-of-operation-research-7165.aspx
+techtarget : 
+https://whatis.techtarget.com/definition/operations-research-OR#:~:text=Operations%20research%20(OR)%20is%20an,defined%20steps%20by%20mathematical%20analysis.
+
 Ref.2
+http://www.tutorsglobe.com/homework-help/operation-research/phases-of-operation-research-7165.aspx
+
 Wikipedia
 
 code matlab
