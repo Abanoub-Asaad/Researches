@@ -1,1 +1,7 @@
 https://www.careerride.com/DB-types-of-indexes.aspx
+
+https://stackoverflow.com/questions/91688/what-are-the-differences-between-a-clustered-and-a-non-clustered-index#:~:text=Clustered%20indexes%20are%20stored%20physically,unique%20column%2C%20usually%20the%20PK.
+
+https://www.careerride.com/DB-types-of-indexes.aspx#:~:text=Clustered%20index%20key%20is%20implemented,value%20and%20a%20row%20locator.
+
+https://www.guru99.com/indexing-in-database.html#2
