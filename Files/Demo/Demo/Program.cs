@@ -23,7 +23,7 @@ namespace Demo
                     new XElement("people",
                         new XElement("ID", 1),
                         new XElement("Name", "Ali"),
-                        new XElement("city", "10th of Ramadan"),
+                        new XElement("city", "New Cairo"),
                         new XElement("country", "egypt")),
 
                         new XElement("people",
@@ -129,6 +129,24 @@ namespace Demo
                       new XElement("country", "egypt")),
 
                       new XElement("people",
+                       new XElement("ID", 23),
+                       new XElement("Name", "yara"),
+                       new XElement("city", "Edfu"),
+                       new XElement("country", "egypt")),
+
+                       new XElement("people",
+                       new XElement("ID", 24),
+                       new XElement("Name", "sayed"),
+                       new XElement("city", "El Arish"),
+                       new XElement("country", "egypt")),
+
+                       new XElement("people",
+                       new XElement("ID", 25),
+                       new XElement("Name", "rana"),
+                       new XElement("city", " El Fashn"),
+                       new XElement("country", "egypt")),
+
+                      new XElement("people",
                       new XElement("ID", 19),
                       new XElement("Name", "tone"),
                       new XElement("city", "Damietta"),
@@ -150,24 +168,6 @@ namespace Demo
                        new XElement("ID", 22),
                        new XElement("Name", "abdalla"),
                        new XElement("city", "Dishna"),
-                       new XElement("country", "egypt")),
-
-                       new XElement("people",
-                       new XElement("ID", 23),
-                       new XElement("Name", "yara"),
-                       new XElement("city", "Edfu"),
-                       new XElement("country", "egypt")),
-
-                       new XElement("people",
-                       new XElement("ID", 24),
-                       new XElement("Name", "sayed"),
-                       new XElement("city", "El Arish"),
-                       new XElement("country", "egypt")),
-
-                       new XElement("people",
-                       new XElement("ID", 25),
-                       new XElement("Name", "rana"),
-                       new XElement("city", " El Fashn"),
                        new XElement("country", "egypt")),
 
                        new XElement("people",
@@ -251,7 +251,7 @@ namespace Demo
                      new XElement("people",
                      new XElement("ID", 40),
                      new XElement("Name", "tone"),
-                     new XElement("city", "New Cairo"),
+                     new XElement("city", "10th of Ramadan"),
                      new XElement("country", "egypt")),
 
                      new XElement("people",
@@ -269,12 +269,12 @@ namespace Demo
             root.ReplaceAll(sortedTables);
             root.Save("people.xml");
             //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            int count = 0;
-            int ent;
-            ent = sortedTables.Length % 4;
-            Console.WriteLine(ent);
+            int count1 = 0;
+            int num_files;
+            num_files = sortedTables.Length % 4;
+            Console.WriteLine(num_files);
 
-            using (XmlTextWriter writer = new XmlTextWriter("people1.xml", null))
+            using (XmlTextWriter writer = new XmlTextWriter("cluster_1.xml", null))
             {
 
                 writer.WriteStartDocument();
@@ -283,11 +283,11 @@ namespace Demo
                 for (int i = 0; i < sortedTables.Length; i++)
                 {
 
-                    // XElement[] d = new XElement[10];
-                    count++;
-                    if (count <= 10)
+                   
+                    count1++;
+                    if (count1 <= 10)
                     {
-                        //  d[0] = sortedTables[i];
+                   
                         writer.WriteStartElement(sortedTables[i].Name.ToString());
 
                         var desiredElement = sortedTables[i].FirstNode as XElement;
@@ -319,7 +319,7 @@ namespace Demo
                         writer.WriteEndElement();
                         writer.WriteEndElement();
                     }
-                    if (count == 10)
+                    if (count1 == 10)
                     {
                         writer.WriteEndElement();
                         writer.WriteEndDocument();
@@ -328,67 +328,16 @@ namespace Demo
                 }
 
             }
-            using (XmlTextWriter writer = new XmlTextWriter("people2.xml", null))
+            using (XmlTextWriter writer = new XmlTextWriter("cluster_2.xml", null))
             {
-                int coun = 0;
+                int count2 = 0;
                 writer.WriteStartDocument();
 
                 writer.WriteStartElement("people");
                 for (int i = 0; i < sortedTables.Length; i++)
                 {
-                    coun++;
-                    if (coun <= 20 && coun > 10)
-                    {
-                        writer.WriteStartElement(sortedTables[i].Name.ToString());
-
-                        var desiredElement = sortedTables[i].FirstNode as XElement;
-                        var n1 = desiredElement.Name;
-                        var v1 = desiredElement.Value;
-                        writer.WriteStartElement(n1.ToString());
-                        writer.WriteString(v1.ToString());
-                        writer.WriteEndElement();
-                        //=========================================================================================================
-                        var desiredElemen = sortedTables[i].FirstNode.NextNode as XElement;
-                        var n2 = desiredElemen.Name;
-                        var v2 = desiredElemen.Value;
-                        writer.WriteStartElement(n2.ToString());
-                        writer.WriteString(v2.ToString());
-                        writer.WriteEndElement();
-                        //==========================================================================================================
-                        var desiredEleme = sortedTables[i].LastNode.PreviousNode as XElement;
-                        var n3 = desiredEleme.Name;
-                        var v3 = desiredEleme.Value;
-                        writer.WriteStartElement(n3.ToString());
-                        writer.WriteString(v3.ToString());
-                        writer.WriteEndElement();
-                        //==========================================================================================================
-                        var desiredElem = sortedTables[i].LastNode as XElement;
-                        var n4 = desiredElem.Name;
-                        var v4 = desiredElem.Value;
-                        writer.WriteStartElement(n4.ToString());
-                        writer.WriteString(v4.ToString());
-                        writer.WriteEndElement();
-                        writer.WriteEndElement();
-                    }
-                    if (coun == 20)
-                    {
-                        writer.WriteEndElement();
-                        writer.WriteEndDocument();
-                        writer.Close();
-                    }
-                }
-
-            }
-            using (XmlTextWriter writer = new XmlTextWriter("people3.xml", null))
-            {
-                int cou = 0;
-                writer.WriteStartDocument();
-
-                writer.WriteStartElement("people");
-                for (int i = 0; i < sortedTables.Length; i++)
-                {
-                    cou++;
-                    if (cou <= 30 && cou > 20)
+                    count2++;
+                    if (count2 <= 20 && count2 > 10)
                     {
                         writer.WriteStartElement(sortedTables[i].Name.ToString());
 
@@ -421,7 +370,7 @@ namespace Demo
                         writer.WriteEndElement();
                         writer.WriteEndElement();
                     }
-                    if (cou == 30)
+                    if (count2 == 20)
                     {
                         writer.WriteEndElement();
                         writer.WriteEndDocument();
@@ -430,18 +379,16 @@ namespace Demo
                 }
 
             }
-
-
-            using (XmlTextWriter writer = new XmlTextWriter("people4.xml", null))
+            using (XmlTextWriter writer = new XmlTextWriter("cluster_3.xml", null))
             {
-                int co = 0;
+                int count3 = 0;
                 writer.WriteStartDocument();
 
                 writer.WriteStartElement("people");
                 for (int i = 0; i < sortedTables.Length; i++)
                 {
-                    co++;
-                    if (co <= 40 && co > 30)
+                    count3++;
+                    if (count3 <= 30 && count3 > 20)
                     {
                         writer.WriteStartElement(sortedTables[i].Name.ToString());
 
@@ -474,7 +421,7 @@ namespace Demo
                         writer.WriteEndElement();
                         writer.WriteEndElement();
                     }
-                    if (co == 40)
+                    if (count3 == 30)
                     {
                         writer.WriteEndElement();
                         writer.WriteEndDocument();
@@ -483,13 +430,66 @@ namespace Demo
                 }
 
             }
-            XElement ro1 = XElement.Load("people1.xml");
+
+
+            using (XmlTextWriter writer = new XmlTextWriter("cluster_4.xml", null))
+            {
+                int count4 = 0;
+                writer.WriteStartDocument();
+
+                writer.WriteStartElement("people");
+                for (int i = 0; i < sortedTables.Length; i++)
+                {
+                    count4++;
+                    if (count4 <= 40 && count4 > 30)
+                    {
+                        writer.WriteStartElement(sortedTables[i].Name.ToString());
+
+                        var desiredElement = sortedTables[i].FirstNode as XElement;
+                        var n1 = desiredElement.Name;
+                        var v1 = desiredElement.Value;
+                        writer.WriteStartElement(n1.ToString());
+                        writer.WriteString(v1.ToString());
+                        writer.WriteEndElement();
+                        //=========================================================================================================
+                        var desiredElemen = sortedTables[i].FirstNode.NextNode as XElement;
+                        var n2 = desiredElemen.Name;
+                        var v2 = desiredElemen.Value;
+                        writer.WriteStartElement(n2.ToString());
+                        writer.WriteString(v2.ToString());
+                        writer.WriteEndElement();
+                        //==========================================================================================================
+                        var desiredEleme = sortedTables[i].LastNode.PreviousNode as XElement;
+                        var n3 = desiredEleme.Name;
+                        var v3 = desiredEleme.Value;
+                        writer.WriteStartElement(n3.ToString());
+                        writer.WriteString(v3.ToString());
+                        writer.WriteEndElement();
+                        //==========================================================================================================
+                        var desiredElem = sortedTables[i].LastNode as XElement;
+                        var n4 = desiredElem.Name;
+                        var v4 = desiredElem.Value;
+                        writer.WriteStartElement(n4.ToString());
+                        writer.WriteString(v4.ToString());
+                        writer.WriteEndElement();
+                        writer.WriteEndElement();
+                    }
+                    if (count4 == 40)
+                    {
+                        writer.WriteEndElement();
+                        writer.WriteEndDocument();
+                        writer.Close();
+                    }
+                }
+
+            }
+            XElement ro1 = XElement.Load("cluster_1.xml");
             XElement[] s1 = ro1.Elements("people").ToArray();
-            XElement ro2 = XElement.Load("people2.xml");
+            XElement ro2 = XElement.Load("cluster_2.xml");
             XElement[] s2 = ro2.Elements("people").ToArray();
-            XElement ro3 = XElement.Load("people3.xml");
+            XElement ro3 = XElement.Load("cluster_3.xml");
             XElement[] s3 = ro3.Elements("people").ToArray();
-            XElement ro4 = XElement.Load("people4.xml");
+            XElement ro4 = XElement.Load("cluster_4.xml");
             XElement[] s4 = ro4.Elements("people").ToArray();
             //------------------------------------------------------------------------------------------
             var desiredE = s1[0].FirstNode as XElement;
@@ -515,26 +515,26 @@ namespace Demo
                new XElement("tables",
                    new XElement("data",
                        new XElement(n11.ToString(), v11.ToString()),
-                       new XElement("Name", "people1.xml")),
+                       new XElement("Name", "cluster_1.xml")),
                         new XElement("data",
                        new XElement(n12.ToString(), v12.ToString()),
-                       new XElement("Name", "people2.xml")),
+                       new XElement("Name", "cluster_2.xml")),
                         new XElement("data",
                        new XElement(n33.ToString(), v33.ToString()),
-                       new XElement("Name", "people3.xml")),
+                       new XElement("Name", "cluster_3.xml")),
                         new XElement("data",
                        new XElement(n44.ToString(), v44.ToString()),
-                       new XElement("Name", "people4.xml"))));
+                       new XElement("Name", "cluster_4.xml"))));
             xmlocumente.Save("Entry_Indices_Table.xml");
             //---------------------------------------------------------------------
             int num = 0;
-            Console.WriteLine("enter 1 to search by ID ");
-            Console.WriteLine("enter 2 to search by name ");
-            Console.Write("enter your chosse : ");
+            Console.WriteLine("Enter 1 to search by ID ");
+            Console.WriteLine("Enter 2 to search by name ");
+            Console.Write("Enter your choice : ");
             String chos = Console.ReadLine();
             if (chos == "1")
             {
-                Console.Write("enter ID :");
+                Console.Write("Enter ID :");
                 int id = Convert.ToInt32(Console.ReadLine());
 
                 XElement f = XElement.Load("Entry_Indices_Table.xml");
@@ -613,7 +613,7 @@ namespace Demo
             if (chos == "2")
             {
                 int coun = 1;
-                Console.Write("enter the city :");
+                Console.Write("Enter the city :");
                 String city = Console.ReadLine();
 
                 XElement f = XElement.Load("people.xml");
