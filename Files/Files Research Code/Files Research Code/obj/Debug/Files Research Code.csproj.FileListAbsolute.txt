@@ -1,0 +1,6 @@
+C:\Users\Abano\source\repos\Files Research Code\Files Research Code\bin\Debug\Files Research Code.exe.config
+C:\Users\Abano\source\repos\Files Research Code\Files Research Code\bin\Debug\Files Research Code.exe
+C:\Users\Abano\source\repos\Files Research Code\Files Research Code\bin\Debug\Files Research Code.pdb
+C:\Users\Abano\source\repos\Files Research Code\Files Research Code\obj\Debug\Files Research Code.csprojAssemblyReference.cache
+C:\Users\Abano\source\repos\Files Research Code\Files Research Code\obj\Debug\Files Research Code.exe
+C:\Users\Abano\source\repos\Files Research Code\Files Research Code\obj\Debug\Files Research Code.pdb

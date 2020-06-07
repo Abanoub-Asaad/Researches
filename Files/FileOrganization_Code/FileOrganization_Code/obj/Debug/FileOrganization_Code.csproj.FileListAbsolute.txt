@@ -1,6 +1,0 @@
-C:\Users\Abano\source\repos\FileOrganization_Code\FileOrganization_Code\bin\Debug\FileOrganization_Code.exe.config
-C:\Users\Abano\source\repos\FileOrganization_Code\FileOrganization_Code\bin\Debug\FileOrganization_Code.exe
-C:\Users\Abano\source\repos\FileOrganization_Code\FileOrganization_Code\bin\Debug\FileOrganization_Code.pdb
-C:\Users\Abano\source\repos\FileOrganization_Code\FileOrganization_Code\obj\Debug\FileOrganization_Code.csprojAssemblyReference.cache
-C:\Users\Abano\source\repos\FileOrganization_Code\FileOrganization_Code\obj\Debug\FileOrganization_Code.exe
-C:\Users\Abano\source\repos\FileOrganization_Code\FileOrganization_Code\obj\Debug\FileOrganization_Code.pdb
