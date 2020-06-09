@@ -4,11 +4,28 @@ import static carpooling_package.CarPooling.sc;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * <h1>Car Pooling</h1>
+ * Car Pooling System is an application that helps managing cars scheduling and
+ * bookings.
+ *
+ * <p>
+ *
+ * CarPooling class is a child and its parent is RootClass
+ */
 public class CarPooling extends RootClass {
 
+    /**
+     * intialize_cars is a mehtod to intialize the cars that I have with its
+     * location, destination, code, capacity and driver name.
+     * <p>
+     * intialize_menu is a method to display in the menu (The valid options that
+     * the user can choose from )
+     */
     public static void main(String[] args) {
 
         Car car_obj = new Car();
+
         car_obj.intialize_cars();
 
         intialize_menu();
@@ -20,21 +37,73 @@ public class CarPooling extends RootClass {
 //-----------------------------------------------------------------------------
 class RootClass {
 
-    final int Alowed_age = 20;
+    /**
+     * is the minimum age to be a subscriber
+     * <br>
+     * It's "final".
+     */
+    public final int Alowed_age = 20;
+    /**
+     * is an array to store all the passengers (Subscribers and
+     * Non-Subscribers).
+     */
     public static ArrayList<Passenger> passengers_array = new ArrayList<Passenger>();
+    /**
+     * is an array to store all the cars.
+     */
     public static ArrayList<Car> cars_array = new ArrayList<Car>();
+    /**
+     * is a Scanner to read data.
+     */
     public static Scanner sc = new Scanner(System.in);
-    private static int choice_menu, choice_endOfStep;
+    /**
+     * is the variable that I use in reading data from the user in menu page.
+     * <br> It's "private and static"
+     */
+    private static int choice_menu;
+    /**
+     * is the variable that I use in reading data from the user in the last step
+     * after opening each method which cintains 2 options (Return to Menu or
+     * Exit the program).
+     * <br> It's "private and static"
+     */
+    private static int choice_endOfStep;
+    /**
+     * to read line in some parts as a test to make it works well.
+     */
+    public static String test;
 
+    /**
+     * is a method to display in the menu (The valid options that the user can
+     * choose from )
+     * <br>Here I used an Exception if the user entered a string or char instead
+     * of integers.
+     */
     public static void intialize_menu() {
         System.out.println("----------------------------------------------------\n"
                 + "Welcome, Our Dear Client\n\nSelect the operation that you want by choosing the number of the process");
-        System.out.println("[1] " + "New User\n" + "[2] " + "Subscribe\n" + "[3] " + "Un-Subscribe\n" + "[4] " + "Search for Route and Reserve a Ticket\n\n");
+        System.out.println("Click [1] : Add " + "New User\n" + "Click [2] : " + "Subscribe\n" + "Click [3] : " + "Un-Subscribe\n" + "Click [4] : " + "Search for Route and Reserve a Ticket\n\n");
         System.out.print("Your choice : ");
-        choice_menu = sc.nextInt();
-        chooseFromHomePage();
+
+        try {
+            choice_menu = sc.nextInt();
+            chooseFromHomePage();
+        } catch (Exception e) {
+            System.out.println("\nPlease, Enter Valid Input\n");
+            test = sc.nextLine();
+            intialize_menu();
+        }
+
     }
 
+    /**
+     * is a method to take the input from the user which is the option that he chose to be executed
+     * <br> It's a "static method"
+     * <br> 1 : Add New User
+     * <br> 2 : Subscribe 
+     * <br> 3 : UnSubscribe
+     * <br> 4 : Search for Route and Reserve a Ticket and after both the user can write a review if he wants.
+     */
     public static void chooseFromHomePage() {
         if (choice_menu == 1) {
             Process prosess_obj = new Process(1);
@@ -44,10 +113,14 @@ class RootClass {
             Process prosess_obj = new Process(3);
         } else if (choice_menu == 4) {
             Process prosess_obj = new Process(4);
+        } else {
+            System.out.println("Please, Enter Valid Input");
+            intialize_menu();
         }
 
     }
 
+    
     public static void endOfStep() {
 
         System.out.println("-------------------------------------------------------");
@@ -58,6 +131,9 @@ class RootClass {
             chooseFromHomePage();
         } else if (choice_endOfStep == 6) {
             System.exit(0);
+        } else {
+            System.out.println("Please, Enter Valid Input");
+            endOfStep();
         }
     }
 }
@@ -87,7 +163,7 @@ class Process {
         CarPooling.endOfStep();
     }
 
-    public void enterYourID(int choice) {
+    public static void enterYourID(int choice) {
 
         CarPooling car_pooling_obj = new CarPooling();
         Car car_obj = new Car();
@@ -193,7 +269,12 @@ class Subsciber extends Passenger {
     @Override
     public void enterAge() {
         System.out.print("Please, Enter your age:  ");
-        passenger_age = CarPooling.sc.nextInt();
+        try {
+            passenger_age = CarPooling.sc.nextInt();
+        } catch (Exception e) {
+            CarPooling.test = sc.nextLine();
+            enterAge();
+        }
     }
 
     void checkAge() {
@@ -330,7 +411,6 @@ class Car {
             print_routes_of_cars();
         }
 
-        //---
         if (!car_filled) {
             System.out.println("\nClick [1] : Reserve a ticket\nClick [2] : Back to Menu");
             int ch = CarPooling.sc.nextInt();
