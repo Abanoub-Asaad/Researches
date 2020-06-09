@@ -1,14 +1,10 @@
 package carpooling_package;
 
+import static carpooling_package.CarPooling.sc;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CarPooling {
-
-    public static ArrayList<Passenger> passengers_array = new ArrayList<Passenger>();
-    public static ArrayList<Car> cars_array = new ArrayList<Car>();
-    public static Scanner sc = new Scanner(System.in);
-    private static int choice_menu, choice_endOfStep;
+public class CarPooling extends main_ {
 
     public static void main(String[] args) {
 
@@ -16,16 +12,27 @@ public class CarPooling {
         car_obj.intialize_cars();
 
         intialize_menu();
-        chooseFromHomePage();
 
     }
+
+}
+
+//-----------------------------------------------------------------------------
+class main_ {
+
+    final int Alowed_age = 20;
+    public static ArrayList<Passenger> passengers_array = new ArrayList<Passenger>();
+    public static ArrayList<Car> cars_array = new ArrayList<Car>();
+    public static Scanner sc = new Scanner(System.in);
+    private static int choice_menu, choice_endOfStep;
 
     public static void intialize_menu() {
         System.out.println("----------------------------------------------------\n"
                 + "Welcome, Our Dear Client\n\nSelect the operation that you want by choosing the number of the process");
-        System.out.println("[1] " + "Subscribe\n" + "[2] " + "Un-Subscribe\n" + "[3] " + "Search for Route\n" + "[4] " + "Reserve a Ticket\n" + "[5] " + "Report Review\n\n");
+        System.out.println("[1] " + "New User\n" + "[2] " + "Subscribe\n" + "[3] " + "Un-Subscribe\n" + "[4] " + "Search for Route and Reserve a Ticket\n\n");
         System.out.print("Your choice : ");
         choice_menu = sc.nextInt();
+        chooseFromHomePage();
     }
 
     public static void chooseFromHomePage() {
@@ -44,19 +51,18 @@ public class CarPooling {
     public static void endOfStep() {
 
         System.out.println("-------------------------------------------------------");
-        System.out.println("If You want to return to Menu choose [6]\nIf You want to exit choose[7]");
+        System.out.println("If You want to return to Menu choose [5]\nIf You want to exit choose[6]");
         choice_endOfStep = sc.nextInt();
-        if (choice_endOfStep == 6) {
+        if (choice_endOfStep == 5) {
             intialize_menu();
             chooseFromHomePage();
-        } else if (choice_endOfStep == 7) {
+        } else if (choice_endOfStep == 6) {
             System.exit(0);
         }
     }
-
 }
-
 //---------------------------------------------------------------------
+
 class Process {
 
     private int choice;
@@ -68,21 +74,22 @@ class Process {
 
     void start() {
         if (choice == 1) {
-            Passenger passenger_obj = new Subsciber();
-        } else if (choice == 2) {
             Passenger passenger_obj = new Non_Subsciber();
+        } else if (choice == 2) {
+            enterYourID(1);
         } else if (choice == 3) {
-            Car car_obj = new Car();
-            enterYourID();
+            enterYourID(2);
         } else if (choice == 4) {
-
+            Car car_obj = new Car();
+            enterYourID(3);
         }
 
         CarPooling.endOfStep();
     }
 
-    public void enterYourID() {
+    public void enterYourID(int choice) {
 
+        CarPooling car_pooling_obj = new CarPooling();
         Car car_obj = new Car();
         boolean registerd = false;
         ArrayList<Passenger> passengers_array = CarPooling.passengers_array;
@@ -93,17 +100,49 @@ class Process {
 
         if (entered_id - 1 < passengers_array.size() && entered_id - 1 > -1) {
             registerd = true;
-            System.out.println("You're registered in the System");
+            System.out.println("OK, You registered in the System Previously");
 
         }
 
         if (registerd) {
-            car_obj.print_routes_of_cars();
-            System.out.println("Choose your Route");
-            car_obj.choose_Route(entered_id);
+
+            Passenger passenger = passengers_array.get(entered_id - 1);
+            if (choice == 1) {
+                if (passenger.passenger_age >= car_pooling_obj.Alowed_age) {
+                    if (passenger.isSubscriber) {
+                        System.out.println("You're already a Subscriber\nAnd There's " + passenger.num_trips + " are available");
+                    } else {
+                        passenger.isSubscriber = true;
+                        passenger.num_trips = 5;
+                        System.out.println("You're now a Subscriber, Enjoy!");
+                    }
+                } else {
+                    System.out.println("\nSorry your age isn't allowed in subscribtion, So you're not subscribed\n");
+                }
+
+            } else if (choice == 2) {
+                if (!passenger.isSubscriber) {
+                    System.out.println("You're already a Non-Subscriber");
+                } else {
+                    passenger.isSubscriber = false;
+                    passenger.num_trips = 0;
+                    System.out.println("You're now a Non-Subscriber User");
+                }
+            } else if (choice == 3) {
+                car_obj.print_routes_of_cars();
+                System.out.println("Choose your Route");
+                car_obj.choose_Route(entered_id);
+            }
+
         } else {
-            System.out.println("Sorry,You're not registered in the System\nSo register here");
-            Passenger passenger_obj = new Non_Subsciber();
+            System.out.println("Sorry,You're not registered in the System\n" + "Click [1] to enter Your ID again\nClick [2] to register");
+            int choicee = CarPooling.sc.nextInt();
+            if (choicee == 1) {
+                enterYourID(choice);
+            } else {
+                Passenger passenger_obj = new Non_Subsciber();
+            }
+
         }
     }
 }
@@ -112,7 +151,6 @@ class Process {
 interface passenger_interface {
 
     public void enterName();
-
     public void enterAge();
 
 }
@@ -137,6 +175,7 @@ abstract class Passenger implements passenger_interface {
 class Subsciber extends Passenger {
 
     Subsciber() {
+
         enterName();
         enterAge();
         checkAge();
@@ -160,6 +199,7 @@ class Subsciber extends Passenger {
             isSubscriber = true;
             CarPooling.passengers_array.add(this);
             this.ID = CarPooling.passengers_array.size();
+            System.out.println("And Your ID is : " + ID);
             this.num_trips = 5;
         } else {
             System.out.println("\nSorry your age isn't allowed in subscribtion, So you're not subscribed\n");
@@ -173,13 +213,19 @@ class Subsciber extends Passenger {
 class Non_Subsciber extends Passenger {
 
     Non_Subsciber() {
+        make_unsubscriber();
+    }
+
+    public void make_unsubscriber() {
         isSubscriber = false;
         enterName();
         enterAge();
         CarPooling.passengers_array.add(this);
         ID = CarPooling.passengers_array.size();
         System.out.println("\nYou're now a Non-Subsciber User\n");
+        System.out.println("***************************************");
         System.out.println("AND Your ID is :  " + ID);
+        System.out.println("***************************************");
     }
 
     Non_Subsciber(String name, int age) {
@@ -215,7 +261,6 @@ class Car {
     int car_code = 0;
     String driver_name;
     String start_from_car, end_to_car;
-    
 
     Car(String start, String destination, int car_code, int capacity, String driver_name) {
 
@@ -223,12 +268,11 @@ class Car {
         this.end_to_car = destination;
         this.car_code = car_code;
         this.capacity = capacity;
-        this.driver_name=driver_name;
+        this.driver_name = driver_name;
         CarPooling.cars_array.add(this);
     }
 
     Car() {
-
     }
 
     public void intialize_cars() {
@@ -269,9 +313,22 @@ class Car {
         chosen_route = CarPooling.sc.nextInt();
         CarPooling.passengers_array.get(entered_id - 1).chosen_route = chosen_route;
 
+        System.out.println("You chosen Route Successfully\n");
+        System.out.println("And its location : " + CarPooling.cars_array.get(chosen_route - 1).start_from_car);
+        System.out.println("And its destination : " + CarPooling.cars_array.get(chosen_route - 1).end_to_car);
+
+        //---
         car_code = CarPooling.cars_array.get(chosen_route - 1).car_code;
-        Ticket ticket_obj = new Ticket();
-        ticket_obj.reserve_ticket(entered_id, car_code);
+
+        System.out.println("\nClick [1] : Reserve a ticket\nClick [2] : Back to Menu");
+        int ch = CarPooling.sc.nextInt();
+        if (ch == 1) {
+            Ticket ticket_obj = new Ticket();
+            ticket_obj.reserve_ticket(entered_id, car_code);
+        } else if (ch == 2) {
+            CarPooling.intialize_menu();
+        }
+
     }
 }
 
@@ -287,7 +344,6 @@ class Ticket {
     }
 
     public void reserve_ticket(int user_id, int car_code) {
-
         this.car_code = car_code;
         check_valid_car(user_id, car_code);
     }
@@ -295,15 +351,22 @@ class Ticket {
     public void check_valid_car(int user_id, int car_code) {
 
         for (Car car : CarPooling.cars_array) {
+
             if (car.car_code == car_code) {
                 if (car.capacity > 0) {
                     --car.capacity;
                     check_discount(user_id);
+                    System.out.println("------------------------------------------------------");
                     System.out.println("You reserved the ticket successfully and its price = " + price);
+                    System.out.println("And its location : " + CarPooling.cars_array.get(car_code % 100).start_from_car);
+                    System.out.println("And its destination : " + CarPooling.cars_array.get(car_code % 100).end_to_car);
+                    System.out.println("------------------------------------------------------");
+                    break;
                 } else {
                     System.out.println("Ooh Sorry, the car isn't valid right now !\nChoose another route");
                     Car car_obj = new Car();
                     car_obj.choose_Route(user_id);
+                    break;
                 }
             }
         }
@@ -312,8 +375,6 @@ class Ticket {
 
     public void check_discount(int user_id) {
 
-        int choice = CarPooling.sc.nextInt();
-
         Passenger cur_passenger = CarPooling.passengers_array.get(user_id - 1);
         if (cur_passenger.isSubscriber && cur_passenger.num_trips > 0) {
             this.price = 100 * discount;
@@ -321,8 +382,14 @@ class Ticket {
         } else {
             this.price = 100;
         }
+        System.out.println("------------------------------------------------------");
         System.out.println("You reserved the ticket sucessfully and\nThe price =  " + price);
+        System.out.println("And its location : " + CarPooling.cars_array.get(car_code % 100).start_from_car);
+        System.out.println("And its destination : " + CarPooling.cars_array.get(car_code % 100).end_to_car);
+        System.out.println("------------------------------------------------------");
         System.out.println("Click [1] If You want to write a review\nClick [2] Exit the program");
+
+        int choice = CarPooling.sc.nextInt();
         if (choice == 1) {
             writeReview(true);
         } else {
@@ -335,7 +402,9 @@ class Ticket {
         if (!ok) {
             System.exit(0);
         } else {
+            System.out.println("Write Your Review HERE : ");
             s = CarPooling.sc.next();
+            System.out.println("Done !!");
         }
     }
 }
