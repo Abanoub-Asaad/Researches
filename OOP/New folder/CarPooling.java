@@ -36,7 +36,7 @@ public class CarPooling extends RootClass {
 }
 
 //-----------------------------------------------------------------------------
- class RootClass {
+class RootClass {
 
     /**
      * is the minimum age to be a subscriber
@@ -77,8 +77,8 @@ public class CarPooling extends RootClass {
     /**
      * is a method to display in the menu (The valid options that the user can
      * choose from )
-     * <br>Here I used an Exception handling if the user entered a string or char instead
-     * of integers.
+     * <br>Here I used an Exception handling if the user entered a string or
+     * char instead of integers.
      */
     public static void intialize_menu() {
         System.out.println("----------------------------------------------------\n"
@@ -151,7 +151,7 @@ public class CarPooling extends RootClass {
  * It's a class that controls on moving from function to another and the
  * branching of the methods.
  */
- class Process {
+class Process {
 
     /**
      * to read the input from the user.
@@ -187,10 +187,14 @@ public class CarPooling extends RootClass {
     }
 
     /**
-     * If the user chose 1, It would make him add new user (Initially Unsubscriber).
-     * <br>If the user chose 2, It would make him subscribe the system (But first he check if entered a correct ID)
-     * <br>If the user chose 3, It would make him Un-subscribe the system (But first he check if entered a correct ID)
-     * <br>If the user chose 4, It would make him choose the route, reserve a ticket and write a review(But first he check if entered a correct ID).
+     * If the user chose 1, It would make him add new user (Initially
+     * Unsubscriber).
+     * <br>If the user chose 2, It would make him subscribe the system (But
+     * first he check if entered a correct ID)
+     * <br>If the user chose 3, It would make him Un-subscribe the system (But
+     * first he check if entered a correct ID)
+     * <br>If the user chose 4, It would make him choose the route, reserve a
+     * ticket and write a review(But first he check if entered a correct ID).
      */
     public void start() {
         if (choice == 1) {
@@ -207,12 +211,15 @@ public class CarPooling extends RootClass {
     }
 
     /**
-     * Here the branching of the most of the system for 3 methods: 
-     * <br> choice = 2 : It would make him subscribe the system (But first he check if entered a correct ID)
-     * <br> choice = 3 : It would make him Un-subscribe the system (But first he check if entered a correct ID)
-     * <br> choice = 4 : It would make him choose the route, reserve a ticket and write a review(But first he check if entered a correct ID).
-     * 
-     * @param choice 
+     * Here the branching of the most of the system for 3 methods:
+     * <br> choice = 2 : It would make him subscribe the system (But first he
+     * check if entered a correct ID)
+     * <br> choice = 3 : It would make him Un-subscribe the system (But first he
+     * check if entered a correct ID)
+     * <br> choice = 4 : It would make him choose the route, reserve a ticket
+     * and write a review(But first he check if entered a correct ID).
+     *
+     * @param choice
      */
     public static void enterYourID(int choice) {
 
@@ -220,7 +227,6 @@ public class CarPooling extends RootClass {
         car_obj = new Car();
         registerd = false;
         ArrayList<Passenger> passengers_array = CarPooling.passengers_array;
-        
 
         System.out.println("Please, Enter Your ID to check If you're registered or not");
         entered_id = CarPooling.sc.nextInt();
@@ -277,12 +283,12 @@ public class CarPooling extends RootClass {
 }
 
 //---------------------------------------------------------------------
-
 /**
- * passenger_interface is an interface that contains 2 methods: enterName() and enterAge()
+ * passenger_interface is an interface that contains 2 methods: enterName() and
+ * enterAge()
  * <br>Passenger class is the class that implements this interface.
  */
- interface passenger_interface {
+interface passenger_interface {
 
     public void enterName();
 
@@ -291,13 +297,13 @@ public class CarPooling extends RootClass {
 }
 
 //---------------------------------------------------------------------
-
 /**
- * 
+ *
  * Passenger is an abstract class that contains some variables and they
- * <br>ID, chosen_route, Alowed_age, passenger_name, passenger_age, isSubscriber(boolean) and num_trips.
+ * <br>ID, chosen_route, Alowed_age, passenger_name, passenger_age,
+ * isSubscriber(boolean) and num_trips.
  */
- abstract class Passenger implements passenger_interface {
+abstract class Passenger implements passenger_interface {
 
     public int ID = 0;
     public int chosen_route = 0;
@@ -313,16 +319,16 @@ public class CarPooling extends RootClass {
 }
 
 //---------------------------------------------------------------------
-
 /**
- * 
- *  Subsciber is a Class that contains all the data that related to the Subsciber users
- *  <br> is also a child and its parent is Passenger class.
+ *
+ * Subsciber is a Class that contains all the data that related to the Subsciber
+ * users
+ * <br> is also a child and its parent is Passenger class.
  */
- class Subsciber extends Passenger {
+class Subsciber extends Passenger {
 
     /**
-     * is a constructor and here also I call some methods and they are 
+     * is a constructor and here also I call some methods and they are
      * enterName(), enterAge() and checkAge()
      */
     Subsciber() {
@@ -342,7 +348,7 @@ public class CarPooling extends RootClass {
         passenger_name = CarPooling.sc.next();
     }
 
-     /**
+    /**
      * is a method to make the user enter his age
      * <br> Here I used Overriding.
      */
@@ -377,16 +383,17 @@ public class CarPooling extends RootClass {
 }
 
 //---------------------------------------------------------------------
-
 /**
- * 
- *  Non_Subsciber is a Class that contains all the data that related to the Non-Subscriber users
- *  <br> is also a child and its parent is Passenger class.
+ *
+ * Non_Subsciber is a Class that contains all the data that related to the
+ * Non-Subscriber users
+ * <br> is also a child and its parent is Passenger class.
  */
-  class Non_Subsciber extends Passenger {
+class Non_Subsciber extends Passenger {
 
     /**
-     * is a constructor and inside it I call another method to execute the roles.
+     * is a constructor and inside it I call another method to execute the
+     * roles.
      */
     Non_Subsciber() {
         make_unsubscriber();
@@ -411,8 +418,9 @@ public class CarPooling extends RootClass {
      * is a method to initialize the name and age that were sent as parameters
      * <br> Then add the non-subscriber passenger to the array of passengers.
      * <br> Here I used overloading.
+     *
      * @param name
-     * @param age 
+     * @param age
      */
     Non_Subsciber(String name, int age) {
 
@@ -446,11 +454,10 @@ public class CarPooling extends RootClass {
 }
 
 //----------------------------------------------------------------------------------
-
 /**
- * This class contains everything related to the Car Class 
+ * This class contains everything related to the Car Class
  */
- class Car {
+class Car {
 
     /**
      * To make it easy, when I want to access the arrayList of cars.
@@ -474,22 +481,23 @@ public class CarPooling extends RootClass {
      */
     public String driver_name;
     /**
-     *  is the address of the car 
+     * is the address of the car
      */
     public String start_from_car;
     /**
-     *  is the destination of the car.
+     * is the destination of the car.
      */
     public String end_to_car;
 
     /**
      * is a constructor to initialize all the data that as parameters
      * <br> Here I used Overloading.
+     *
      * @param start
      * @param destination
      * @param car_code
      * @param capacity
-     * @param driver_name 
+     * @param driver_name
      */
     Car(String start, String destination, int car_code, int capacity, String driver_name) {
 
@@ -505,8 +513,8 @@ public class CarPooling extends RootClass {
     }
 
     /**
-     * is a mehtod to intialize the cars that I have with its
-     * location, destination, code, capacity and driver name.
+     * is a mehtod to intialize the cars that I have with its location,
+     * destination, code, capacity and driver name.
      */
     public void intialize_cars() {
 
@@ -529,7 +537,8 @@ public class CarPooling extends RootClass {
     }
 
     /**
-     * is a method to print all the routes for each car to make the user choose what he wants.
+     * is a method to print all the routes for each car to make the user choose
+     * what he wants.
      */
     public void print_routes_of_cars() {
 
@@ -544,8 +553,10 @@ public class CarPooling extends RootClass {
     }
 
     /**
-     * is a method to make the user choose the route that he wants 
-     * <br> And After checking it and making sure that it's a valid route, then the user can reserve a ticket.
+     * is a method to make the user choose the route that he wants
+     * <br> And After checking it and making sure that it's a valid route, then
+     * the user can reserve a ticket.
+     *
      * @param entered_id is the ID of the Current User.
      */
     public void choose_Route(int entered_id) {
@@ -583,9 +594,8 @@ public class CarPooling extends RootClass {
 }
 
 //-------------------------------------------------------------------------------
-
 /**
- * 
+ *
  * This class contains all the methods that related to The Ticket.
  */
 class Ticket {
@@ -611,7 +621,8 @@ class Ticket {
 
     /**
      * This method is used to reserve a ticket as its name shows
-     * @param user_id  is the ID of the passenger
+     *
+     * @param user_id is the ID of the passenger
      * @param car_code is the Code of the specified car.
      */
     public void reserve_ticket(int user_id, int car_code) {
@@ -620,11 +631,14 @@ class Ticket {
     }
 
     /**
-     * This method to check if the chosen car is valid which means there is a capacity in it.
-     * <br> And if it is valid, The System will make you reserve a ticket then write a review if you want
+     * This method to check if the chosen car is valid which means there is a
+     * capacity in it.
+     * <br> And if it is valid, The System will make you reserve a ticket then
+     * write a review if you want
      * <br> If not, So you should take another car.
+     *
      * @param user_id
-     * @param car_code 
+     * @param car_code
      */
     public void check_valid_car(int user_id, int car_code) {
 
@@ -660,10 +674,12 @@ class Ticket {
     }
 
     /**
-     * This method to check discount because if the user is a subscriber there will a discount by 50%
+     * This method to check discount because if the user is a subscriber there
+     * will a discount by 50%
      * <br> Then decrease the number of trips for him by one
      * <br> If the user is a non-subscriber, there'll not be a discount.
-     * @param user_id 
+     *
+     * @param user_id
      */
     public void check_discount(int user_id) {
 
@@ -679,6 +695,7 @@ class Ticket {
 
     /**
      * This method to make the user write a review if he wants.
+     *
      * @param ok to check if the user wants to write or not
      */
     public void writeReview(boolean ok) {
